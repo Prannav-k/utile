@@ -75,11 +75,16 @@ void utile::updatestorage(name storageName,uint32_t totalCapacity,uint32_t avail
   require_auth(storageName);
 
   transaction_table transactions(get_self(), get_first_receiver().value);
-
   auto iterator = transactions.find(txnId);
+  check(iterator == transactions.end(), "Record of given txn id already exist");
 
-    check(iterator == transactions.end(), "Record of given txn id already exist");
+  storage_table storages(get_self(), get_first_receiver().value);
+  auto storageIterator = storages.find(storageName.value);
+  check(storageIterator != storages.end(), "Record of given storage doesn't exist");
 
+  //print(storageIterator->storageName);
+
+  print("Okaal");
 
     if( iterator == transactions.end() )
     {
@@ -91,6 +96,8 @@ void utile::updatestorage(name storageName,uint32_t totalCapacity,uint32_t avail
         row.storageLocId = storageLocId;
       });
     }
+
+
 
 }
 
