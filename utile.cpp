@@ -43,13 +43,12 @@ void utile::updatestorage(name storageName,uint32_t totalCapacity,uint32_t avail
 
   storage_table storages(get_self(), get_first_receiver().value);
 
-  auto iterator = storages.find(storageName.value);
+  auto storageIterator = storages.find(storageName.value);
 
 
-        check(iterator != storages.end(), "Record of given storage does not exist");
+        check(storageIterator != storages.end(), "Record of given storage does not exist");
 
-   
-        storages.modify(iterator, storageName, [&]( auto& row ) {
+        storages.modify(storageIterator, storageName, [&]( auto& row ) {
         row.storageName = storageName;
         row.totalCapacity = totalCapacity;
         row.availableCapacity = availableCapacity;
@@ -74,17 +73,21 @@ void utile::updatestorage(name storageName,uint32_t totalCapacity,uint32_t avail
 
   require_auth(storageName);
 
+  //check if txn already exists
   transaction_table transactions(get_self(), get_first_receiver().value);
   auto iterator = transactions.find(txnId);
   check(iterator == transactions.end(), "Record of given txn id already exist");
 
+  //check if storage is present
   storage_table storages(get_self(), get_first_receiver().value);
   auto storageIterator = storages.find(storageName.value);
-  check(storageIterator != storages.end(), "Record of given storage doesn't exist");
+  check(storageIterator != storages.end(), "Record of given storage does not exist");
+
+  //check if enough space is present in storage
+  check(amount < storageIterator->availableCapacity,"Amount mentioned exceeds current available storage");
 
   //print(storageIterator->storageName);
 
-  print("Okaal");
 
     if( iterator == transactions.end() )
     {
@@ -98,6 +101,13 @@ void utile::updatestorage(name storageName,uint32_t totalCapacity,uint32_t avail
     }
 
 
+    //update storage available quantity
+
+       storages.modify(storageIterator, storageName, [&]( auto& row ) {
+        row.storageName = storageIterator->storageName;
+        row.totalCapacity = storageIterator->totalCapacity;
+        row.availableCapacity = storageIterator->availableCapacity-amount;
+      });
 
 }
 
