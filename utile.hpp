@@ -18,7 +18,7 @@ class  [[eosio::contract("utile")]] utile: public eosio::contract{
             name            storageName;
             uint32_t        totalCapacity;
             uint32_t        availableCapacity;
-            //string&   address; 
+            string&         address; 
             
             auto primary_key() const {return storageName.value; }
 
@@ -31,7 +31,7 @@ class  [[eosio::contract("utile")]] utile: public eosio::contract{
             name         storageName;
             uint32_t     amount;
             uint32_t     date;
-           // string&      categeory;
+            string       categeory;
             string       storageLocId; 
             /* data */
 
