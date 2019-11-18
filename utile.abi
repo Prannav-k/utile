@@ -4,6 +4,24 @@
     "types": [],
     "structs": [
         {
+            "name": "addcoop",
+            "base": "",
+            "fields": [
+                {
+                    "name": "coopName",
+                    "type": "name"
+                },
+                {
+                    "name": "zipcode",
+                    "type": "string"
+                },
+                {
+                    "name": "godowns",
+                    "type": "name[]"
+                }
+            ]
+        },
+        {
             "name": "addstorage",
             "base": "",
             "fields": [
@@ -18,6 +36,14 @@
                 {
                     "name": "availableCapacity",
                     "type": "uint32"
+                },
+                {
+                    "name": "address",
+                    "type": "string"
+                },
+                {
+                    "name": "zipcode",
+                    "type": "string"
                 }
             ]
         },
@@ -44,6 +70,24 @@
                 {
                     "name": "storageLocId",
                     "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "coop",
+            "base": "",
+            "fields": [
+                {
+                    "name": "coopName",
+                    "type": "name"
+                },
+                {
+                    "name": "zipcode",
+                    "type": "string"
+                },
+                {
+                    "name": "godowns",
+                    "type": "name[]"
                 }
             ]
         },
@@ -72,6 +116,14 @@
                 {
                     "name": "availableCapacity",
                     "type": "uint32"
+                },
+                {
+                    "name": "address",
+                    "type": "string"
+                },
+                {
+                    "name": "zipcode",
+                    "type": "string"
                 }
             ]
         },
@@ -96,8 +148,30 @@
                     "type": "uint32"
                 },
                 {
+                    "name": "categeory",
+                    "type": "string"
+                },
+                {
                     "name": "storageLocId",
                     "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "updatecoop",
+            "base": "",
+            "fields": [
+                {
+                    "name": "coopName",
+                    "type": "name"
+                },
+                {
+                    "name": "zipcode",
+                    "type": "string"
+                },
+                {
+                    "name": "godowns",
+                    "type": "name[]"
                 }
             ]
         },
@@ -122,6 +196,11 @@
     ],
     "actions": [
         {
+            "name": "addcoop",
+            "type": "addcoop",
+            "ricardian_contract": ""
+        },
+        {
             "name": "addstorage",
             "type": "addstorage",
             "ricardian_contract": ""
@@ -137,12 +216,24 @@
             "ricardian_contract": ""
         },
         {
+            "name": "updatecoop",
+            "type": "updatecoop",
+            "ricardian_contract": ""
+        },
+        {
             "name": "updatestorage",
             "type": "updatestorage",
             "ricardian_contract": ""
         }
     ],
     "tables": [
+        {
+            "name": "coops",
+            "type": "coop",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
         {
             "name": "storages",
             "type": "storage",
