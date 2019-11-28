@@ -7,7 +7,7 @@ const { JsSignatureProvider } = require('eosjs/dist/eosjs-jssig');  // developme
 const privateKeys = ["5KknNLKw9bkjpoRPiBxSRrnKCZKjiAjuGGnXX9pf1eFUWevgnie"];
 
 
-const rpc = new JsonRpc('http://192.168.0.137:8888', { fetch }); //required to read blockchain state
+const rpc = new JsonRpc('http://192.168.0.137:8889', { fetch }); //required to read blockchain state
 const signatureProvider = new JsSignatureProvider(privateKeys);
 const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), textEncoder: new TextEncoder() }); //required to submit transactions
 
